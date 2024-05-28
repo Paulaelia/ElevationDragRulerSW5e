@@ -1,24 +1,17 @@
-![Latest Release Download Count](https://img.shields.io/github/downloads/PepijnMC/ElevationDragRuler/latest/module.zip?color=2b82fc&label=latest%20release%20downloads&style=for-the-badge)
-![Foundry Core Compatible Version](https://img.shields.io/badge/dynamic/json.svg?url=https%3A%2F%2Fgithub.com%2FPepijnMC%2FElevationDragRuler%2Freleases%2Flatest%2Fdownload%2Fmodule.json&label=Foundry%20Version&query=$.compatibility.verified&colorB=orange&style=for-the-badge)
-<a href='https://ko-fi.com/pepijn' target='_blank'><img src='https://img.shields.io/badge/Donate-Buy%20me%20a%20coffee-red?style=for-the-badge' alt='Buy Me a Coffee at ko-fi.com' />
-
-# DnD5e Drag Ruler Integration
-A Foundry VTT module that aims to enhance the Drag Ruler module for use with the DnD5e system. This includes tokens being able to easily and quickly change between their different types of movement speed (swimming, flying, burrowing, and climbing) and an 'automatic' movement setting to streamline your encounter setups. You will no longer have to struggle with Wisps only showing their 0 feet walking speed, or with Dragons and their multitude of different movement speeds.
+# SW5e Drag Ruler Integration
+A Foundry VTT module that aims to enhance the Drag Ruler module for use with the SW5e system. This includes tokens being able to easily and quickly change between their different types of movement speed (swimming, flying, burrowing, and climbing) and an 'automatic' movement setting to streamline your encounter setups. You will no longer have to struggle with Wisps only showing their 0 feet walking speed, or with Dragons and their multitude of different movement speeds.
   
 In addition this module fully supports the use of the Enhanced Terrain Layer + Terrain Ruler modules, actors and tokens can be configured to ignore certain types of terrain based on the movement speed they are currently using. Swimming in water terrain or climbing in mountain terrain is no longer a problem for your characters and creatures, even your Ranger can be configured to ignore movement penalties in their favored terrain. 
 
-![Creatures can more easily use their different movement speeds.](https://raw.githubusercontent.com/PepijnMC/ElevationDragRuler/main/media/switching_speeds.webp)
+![Creatures can more easily use their different movement speeds.](https://raw.githubusercontent.com/Paulaelia/ElevationDragRulerSW5e/main/media/switching_speeds.webp)
 ## Requirements
-- <a href="https://foundryvtt.com/packages/dnd5e" target="_blank">DnD5e</a> system by Atropos
+- <a href="https://github.com/sw5e-foundry/sw5e" target="_blank">SW5e</a> system by sw5e Foundry
 - <a href="https://github.com/manuelVo/foundryvtt-drag-ruler" target="_blank">Drag Ruler</a> module by Manuel Vögele
-### Recommended
-- <a href="https://github.com/manuelVo/foundryvtt-terrain-ruler" target="_blank">Terrain Ruler</a> module by Manuel Vögele
-- <a href="https://github.com/ironmonk88/enhanced-terrain-layer" target="_blank">Enhanced Terrain Layer</a> module by IronMonk
 
 ## Movement Options
 A creature's movement speed can be picked by clicking a button in the Token HUD. By default this is set to automatic, which lets the module figure out what movement speed to use. There are also two keybindings (default `[` and `]`) to cycle through the movement modes of selected tokens.
   
-<img src="https://raw.githubusercontent.com/PepijnMC/ElevationDragRuler/main/media/Token%20HUD%20Switch%20Speed.png" width="200">
+<img src="https://raw.githubusercontent.com/Paulaelia/ElevationDragRulerSW5e/main/media/Token%20HUD%20Switch%20Speed.png" width="200">
   
 ### Elevation
 When a creature's movement speed is set to automatic, the module uses the token's elevation to determine its movement speed. Above ground the creature will fly and below ground the creature will burrow, or swim if water terrain is present. The usage of elevation can be disabled in the speed controller settings, in which case a creature with its movement speed set to automatic will always use its highest movement speed, or water speed if water terrain is present.
@@ -27,32 +20,10 @@ When a creature's movement speed is set to automatic, the module uses the token'
 In the resource tab of the token configuration a token can be set to have access to bonus dashes, which when enabled will include an additional range band. This setting is enabled by default for creatures with features that permanently grant a bonus action dash, like Cunning Action.
 
 ### Conditions
-Various conditions in Dnd5e affect movement and this module handles all of them. Being either dead, grappled, incapacitated, paralysed, petrified, restrained, asleep, stunned, and/or unconscious will set a creature movement range to zero. Additionally, creatures that are hasted or slowed will have their movement speed doubled or halved respectively. Prone creatures will automatically crawl, spending extra movement.
-
-### Teleportation (Experimental Setting)
-> Requires Terrain Ruler
-
-> Currently affected by a bug, see https://github.com/PepijnMC/ElevationDragRuler/issues/42
-
-In the resource tab of the token configuration menu a teleportation range and cost can be specified. If the teleportation range is set to a number greater than zero, cycling through that token's movement modes will include a teleportation option. When teleporting, a token will spent only the specified cost (`0` by default) regardless of the actual distance moved. This allows for more fluid integration of teleportation during combat with drag ruler's movement history turned on.
-
-A keybinding (default `Q`) can be held down to force a token to teleport regardless of its selected speed. Make sure to have the token selected before pressing the hotkey but do not yet start dragging it yet.
-
-## Difficult Terrain
-When using Enhanced Terrain Layer and Terrain Ruler, movement costs are calculated according to DnD5e rules. This means movement costs only stack between water terrain and other terrain.
-  
-A token can be configured to ignore certain or all terrain for a certain or any movement speed. This works for individual tokens but also for prototype tokens from actors and for the default token configuration in the core settings. By default swimming will ignore water terrain and burrowing/climbing will ignore mountain terrain.
-
-<img src="https://raw.githubusercontent.com/PepijnMC/ElevationDragRuler/main/media/Token%20Terrain%20Configuration.png" width="400">
-  
-The Token HUD also contains a button to quickly toggle all difficult terrain for any movement speed for that token. A keybinding (default `E`) is also provided to toggle difficult terrain for selected tokens.
-  
-<img src="https://raw.githubusercontent.com/PepijnMC/ElevationDragRuler/main/media/Token%20HUD%20Toggle%20Terrain.png" width="200">
-
-To help streamline the use of flying creatures, flying tokens will be treated as if they were 1 elevation higher for the purpose of ignoring difficult terrain. This eliminates the cumbersome manual changing of a token's elevation to make it ignore ground based difficult terrain before landing back on the ground. This behavior can be disabled in the settings.
+Various conditions in SW5e affect movement and this module handles all of them. Being either dead, grappled, incapacitated, paralysed, petrified, restrained, asleep, stunned, and/or unconscious will set a creature movement range to zero. Additionally, creatures that are hasted or slowed will have their movement speed doubled or halved respectively. Prone creatures will automatically crawl, spending extra movement.
 
 ## Issues and Requests
-Please report issues and propose requests <a href="https://github.com/PepijnMC/ElevationDragRuler/issues" target="_blank">here</a>.
+Please report issues and propose requests <a href="https://github.com/Paulaelia/ElevationDragRulerSW5e/issues" target="_blank">here</a>.
 
 ## Translations
 You can help translate this module [here](https://weblate.foundryvtt-hub.com/engage/elevation-drag-ruler). There are a handful of languages setup to translate but please feel free to add any other language, it is quick and easy to do.
