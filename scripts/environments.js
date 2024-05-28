@@ -1,4 +1,4 @@
-export function getDnd5eEnvironments() {
+export function getSW5eEnvironments() {
 	return [
 		{ id: 'arctic', text: 'EnhancedTerrainLayer.environment.arctic', icon: 'modules/enhanced-terrain-layer/img/environment/arctic.png' },
 		{ id: 'coast', text: 'EnhancedTerrainLayer.environment.coast', icon: 'modules/enhanced-terrain-layer/img/environment/coast.png' },
@@ -12,10 +12,10 @@ export function getDnd5eEnvironments() {
 		{ id: 'urban', text: 'EnhancedTerrainLayer.environment.urban', icon: 'modules/enhanced-terrain-layer/img/environment/urban.png' },
 		{ id: 'water', text: 'EnhancedTerrainLayer.environment.water', icon: 'modules/enhanced-terrain-layer/img/environment/water.png' },
 
-		{ id: 'controlWinds', text: 'Dnd5eDragRulerIntegration.environment.controlwinds', icon: 'modules/enhanced-terrain-layer/img/environment/current.png', obstacle: true },
-		{ id: 'gustOfWind', text: 'Dnd5eDragRulerIntegration.environment.gustofwind', icon: 'modules/enhanced-terrain-layer/img/environment/current.png', obstacle: true },
-		{ id: 'plantGrowth', text: 'Dnd5eDragRulerIntegration.environment.plantgrowth', icon: 'modules/enhanced-terrain-layer/img/environment/plants.png', obstacle: true },
-		{ id: 'wallOfSand', text: 'Dnd5eDragRulerIntegration.environment.wallofsand', icon: 'modules/enhanced-terrain-layer/img/environment/desert.png', obstacle: true },
-		{ id: 'wallOfThorns', text: 'Dnd5eDragRulerIntegration.environment.wallofthorns', icon: 'modules/enhanced-terrain-layer/img/environment/plants.png', obstacle: true }
+		{ id: 'controlWinds', text: 'SW5eDragRulerIntegration.environment.controlwinds', icon: 'modules/enhanced-terrain-layer/img/environment/current.png', obstacle: true },
+		{ id: 'gustOfWind', text: 'SW5eDragRulerIntegration.environment.gustofwind', icon: 'modules/enhanced-terrain-layer/img/environment/current.png', obstacle: true },
+		{ id: 'plantGrowth', text: 'SW5eDragRulerIntegration.environment.plantgrowth', icon: 'modules/enhanced-terrain-layer/img/environment/plants.png', obstacle: true },
+		{ id: 'wallOfSand', text: 'SW5eDragRulerIntegration.environment.wallofsand', icon: 'modules/enhanced-terrain-layer/img/environment/desert.png', obstacle: true },
+		{ id: 'wallOfThorns', text: 'SW5eDragRulerIntegration.environment.wallofthorns', icon: 'modules/enhanced-terrain-layer/img/environment/plants.png', obstacle: true }
 	]
 }

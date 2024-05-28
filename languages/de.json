@@ -1,9 +1,9 @@
 {
-	"Dnd5eDragRulerIntegration": {
+	"SW5eDragRulerIntegration": {
 		"settings": {
 			"tokenTerrain": {
 				"name": "Schwieriges Gelände für Spielfiguren",
-				"hint": "Implementiert die Dnd5e-Regeln für das Bewegen durch Spielfiguren hindurch (erfordert \"Tote zählen als schwieriges Gelände\" aus dem \"Enhanced Terrain-Layer\" Modul)."
+				"hint": "Implementiert die SW5e-Regeln für das Bewegen durch Spielfiguren hindurch (erfordert \"Tote zählen als schwieriges Gelände\" aus dem \"Enhanced Terrain-Layer\" Modul)."
 			},
 			"elevationSwitching": {
 				"name": "Höhe einbeziehen",

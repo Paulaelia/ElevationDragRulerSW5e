@@ -2,7 +2,7 @@ import { isTokenInCombat, hasCondition, hasFeature, getMovementMode, getMovement
 
 //Hooking into Drag Ruler.
 Hooks.once('dragRuler.ready', (SpeedProvider) => {
-	class DnD5eSpeedProvider extends SpeedProvider {
+	class SW5eSpeedProvider extends SpeedProvider {
 		//An array of colors to be used by the movement ranges.
 		get colors() {
 			return [
@@ -74,5 +74,5 @@ Hooks.once('dragRuler.ready', (SpeedProvider) => {
 		}
 	}
 	//Registers the speed provider to be used by Drag Ruler's API.
-	dragRuler.registerModule('elevation-drag-ruler', DnD5eSpeedProvider)
+	dragRuler.registerModule('elevation-drag-ruler', SW5eSpeedProvider)
 });

@@ -3,7 +3,7 @@ import { registerKeybindings } from './keybindings.js';
 import { registerAPI } from './api.js';
 import { addConfig } from './token_config.js';
 import { addSpeedButton, addTerrainButton } from './token_hud.js';
-import { getDnd5eEnvironments } from './environments.js';
+import { getSW5eEnvironments } from './environments.js';
 import { isTokenInCombat } from './util.js';
 import { modifyPreviousMovementCost } from './movement_history.js';
 
@@ -30,7 +30,7 @@ Hooks.once('init', () => {
 
 Hooks.once('canvasInit', () => {
 	if (game.modules.get('enhanced-terrain-layer')?.active)
-		libWrapper.register('elevation-drag-ruler', 'canvas.terrain.getEnvironments', getDnd5eEnvironments, libWrapper.OVERRIDE);
+		libWrapper.register('elevation-drag-ruler', 'canvas.terrain.getEnvironments', getSW5eEnvironments, libWrapper.OVERRIDE);
 	if (game.settings.get('elevation-drag-ruler', 'teleport'))
 		libWrapper.register('elevation-drag-ruler', 'Token.prototype._onDragLeftStart', onDragLeftStart, 'WRAPPER');
 });

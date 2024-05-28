@@ -4,8 +4,8 @@ export var keybindForceTeleport;
 
 export function registerKeybindings() {
 	game.keybindings.register('elevation-drag-ruler', 'cycleMovement', {
-		name: game.i18n.localize('Dnd5eDragRulerIntegration.keybindings.cycleMovement.name'),
-		hint: game.i18n.localize('Dnd5eDragRulerIntegration.keybindings.cycleMovement.hint'),
+		name: game.i18n.localize('SW5eDragRulerIntegration.keybindings.cycleMovement.name'),
+		hint: game.i18n.localize('SW5eDragRulerIntegration.keybindings.cycleMovement.hint'),
 		onDown: handleCycleMovement,
 		editable: [
 			{
@@ -16,8 +16,8 @@ export function registerKeybindings() {
 	});
 
 	game.keybindings.register('elevation-drag-ruler', 'cycleMovementReverse', {
-		name: game.i18n.localize('Dnd5eDragRulerIntegration.keybindings.cycleMovementReverse.name'),
-		hint: game.i18n.localize('Dnd5eDragRulerIntegration.keybindings.cycleMovementReverse.hint'),
+		name: game.i18n.localize('SW5eDragRulerIntegration.keybindings.cycleMovementReverse.name'),
+		hint: game.i18n.localize('SW5eDragRulerIntegration.keybindings.cycleMovementReverse.hint'),
 		onDown: handleCycleMovementReverse,
 		editable: [
 			{
@@ -28,8 +28,8 @@ export function registerKeybindings() {
 	});
 
 	game.keybindings.register('elevation-drag-ruler', 'toggleTerrain', {
-		name: game.i18n.localize('Dnd5eDragRulerIntegration.keybindings.toggleTerrain.name'),
-		hint: game.i18n.localize('Dnd5eDragRulerIntegration.keybindings.toggleTerrain.hint'),
+		name: game.i18n.localize('SW5eDragRulerIntegration.keybindings.toggleTerrain.name'),
+		hint: game.i18n.localize('SW5eDragRulerIntegration.keybindings.toggleTerrain.hint'),
 		onDown: handleToggleTerrain,
 		editable: [
 			{
@@ -40,8 +40,8 @@ export function registerKeybindings() {
 	});
 
 	game.keybindings.register('elevation-drag-ruler', 'forceTeleport', {
-		name: game.i18n.localize('Dnd5eDragRulerIntegration.keybindings.forceTeleport.name'),
-		hint: game.i18n.localize('Dnd5eDragRulerIntegration.keybindings.forceTeleport.hint'),
+		name: game.i18n.localize('SW5eDragRulerIntegration.keybindings.forceTeleport.name'),
+		hint: game.i18n.localize('SW5eDragRulerIntegration.keybindings.forceTeleport.hint'),
 		onDown: handleForceTeleport,
 		onUp: unhandleForceTeleport,
 		editable: [

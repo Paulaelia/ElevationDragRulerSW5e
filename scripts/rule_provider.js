@@ -1,7 +1,7 @@
 import { getConfiguredEnvironments, hasCondition, hasFeature } from "./util.js";
 
 Hooks.once("enhancedTerrainLayer.ready", (RuleProvider) => {
-	class DnD5eRuleProvider extends RuleProvider {
+	class SW5eRuleProvider extends RuleProvider {
 		calculateCombinedCost(terrain, options) {
 			const token = options.token || canvas.tokens.controlled[0];
 	
@@ -102,5 +102,5 @@ Hooks.once("enhancedTerrainLayer.ready", (RuleProvider) => {
 			return movementCost;
 		}
 	}
-	enhancedTerrainLayer.registerModule("elevation-drag-ruler", DnD5eRuleProvider);
+	enhancedTerrainLayer.registerModule("elevation-drag-ruler", SW5eRuleProvider);
 });

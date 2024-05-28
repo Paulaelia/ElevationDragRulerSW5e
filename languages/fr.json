@@ -1,9 +1,9 @@
 {
-	"Dnd5eDragRulerIntegration": {
+	"SW5eDragRulerIntegration": {
 		"settings": {
 			"tokenTerrain": {
 				"name": "Token Terrain difficile",
-				"hint": "Implémente les règles de Dnd5e pour se déplacer à travers les tokens (nécessite Inclure les tokens vivants/morts du module Enhanced Terrain Layer)."
+				"hint": "Implémente les règles de SW5e pour se déplacer à travers les tokens (nécessite Inclure les tokens vivants/morts du module Enhanced Terrain Layer)."
 			},
 			"elevationSwitching": {
 				"name": "Utiliser l'élévation",
