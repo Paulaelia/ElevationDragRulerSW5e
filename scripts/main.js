@@ -13,9 +13,9 @@ let onDragLeftStart = async function (wrapped, ...args) {
 	wrapped(...args);
 	if (canvas != null) {
 		const token = args[0].data.clones[0];
-		const previousMovementMode = token.document.getFlag('elevation-drag-ruler', 'movementMode');
+		const previousMovementMode = token.document.getFlag('elevation-drag-ruler-sw5e', 'movementMode');
 		if (previousMovementMode == 'teleport' && isTokenInCombat(token.document) && game.settings.get('drag-ruler', 'enableMovementHistory') && game.modules.get('terrain-ruler')?.active) {
-			const teleportCost = token.document.getFlag('elevation-drag-ruler', 'teleportCost') || 0;
+			const teleportCost = token.document.getFlag('elevation-drag-ruler-sw5e', 'teleportCost') || 0;
 			modifyPreviousMovementCost(token, teleportCost);
 		};
 	}
@@ -30,16 +30,16 @@ Hooks.once('init', () => {
 
 Hooks.once('canvasInit', () => {
 	if (game.modules.get('enhanced-terrain-layer')?.active)
-		libWrapper.register('elevation-drag-ruler', 'canvas.terrain.getEnvironments', getSW5eEnvironments, libWrapper.OVERRIDE);
-	if (game.settings.get('elevation-drag-ruler', 'teleport'))
-		libWrapper.register('elevation-drag-ruler', 'Token.prototype._onDragLeftStart', onDragLeftStart, 'WRAPPER');
+		libWrapper.register('elevation-drag-ruler-sw5e', 'canvas.terrain.getEnvironments', getSW5eEnvironments, libWrapper.OVERRIDE);
+	if (game.settings.get('elevation-drag-ruler-sw5e', 'teleport'))
+		libWrapper.register('elevation-drag-ruler-sw5e', 'Token.prototype._onDragLeftStart', onDragLeftStart, 'WRAPPER');
 });
 
 Hooks.on('renderTokenHUD', (app, html, data) => {
 	const tokenDocument = app.object.document
-	if (!game.settings.get('elevation-drag-ruler', 'hideSpeedButton') && !tokenDocument.getFlag('elevation-drag-ruler', 'hideSpeedButton') && game.user.role >= game.settings.get('elevation-drag-ruler', 'restrictSpeedButton'))
+	if (!game.settings.get('elevation-drag-ruler-sw5e', 'hideSpeedButton') && !tokenDocument.getFlag('elevation-drag-ruler-sw5e', 'hideSpeedButton') && game.user.role >= game.settings.get('elevation-drag-ruler-sw5e', 'restrictSpeedButton'))
 		addSpeedButton(tokenDocument, html);
-	if (!game.settings.get('elevation-drag-ruler', 'hideTerrainButton') && !tokenDocument.getFlag('elevation-drag-ruler', 'hideTerrainButton') && game.modules.get('terrain-ruler')?.active && game.user.role >= game.settings.get('elevation-drag-ruler', 'restrictTerrainButton'))
+	if (!game.settings.get('elevation-drag-ruler-sw5e', 'hideTerrainButton') && !tokenDocument.getFlag('elevation-drag-ruler-sw5e', 'hideTerrainButton') && game.modules.get('terrain-ruler')?.active && game.user.role >= game.settings.get('elevation-drag-ruler-sw5e', 'restrictTerrainButton'))
 		addTerrainButton(tokenDocument, html);
 });
 

@@ -18,7 +18,7 @@ function addConfigTerrainTab(config, html) {
 		terrainTab.append(`<div class="form-group" id="${environment}" style="text-align:center;"><label>${environment.charAt(0).toUpperCase() + environment.slice(1)}</label></div>`);
 		const environmentRow = terrainTab.find(`div.form-group#${environment}`);
 		for (const speed in configuredEnvironments[environment]) {
-			environmentRow.append(`<label><input type="checkbox" title="Ignore ${environment} terrain for ${speed} speed" name="flags.elevation-drag-ruler.ignoredEnvironments.${environment}.${speed}" ${configuredEnvironments[environment][speed] ? 'checked=""' : '""'}></label>`);
+			environmentRow.append(`<label><input type="checkbox" title="Ignore ${environment} terrain for ${speed} speed" name="flags.elevation-drag-ruler-sw5e.ignoredEnvironments.${environment}.${speed}" ${configuredEnvironments[environment][speed] ? 'checked=""' : '""'}></label>`);
 		}
 	};
 }
@@ -34,27 +34,27 @@ function createConfigOption(label, inputType, flag, value) {
 			break;
 	}
 	
-	return `<div class='form-group'><label>${label}</label><input type='${inputType}' name='flags.elevation-drag-ruler.${flag}' ${defaultValue}></div>`
+	return `<div class='form-group'><label>${label}</label><input type='${inputType}' name='flags.elevation-drag-ruler-sw5e.${flag}' ${defaultValue}></div>`
 }
 
 function addConfigResourceField(config, html) {
 	const tokenDocument = config.token;
 	const tokenSpeeds = getTokenSpeeds(tokenDocument);
-	const selectedSpeed = tokenDocument.getFlag('elevation-drag-ruler', 'selectedSpeed');
+	const selectedSpeed = tokenDocument.getFlag('elevation-drag-ruler-sw5e', 'selectedSpeed');
 	const bonusDash = hasFeature(tokenDocument, 'hasBonusDash', ['Cunning Action', 'Escape', 'LightFooted', 'Rapid Movement']);
 	const nimbleness = hasFeature(tokenDocument, 'hasNimbleness', ['Halfling Nimbleness', 'Halfling']);
 	const elementalForm = hasFeature(tokenDocument, 'hasElementalForm', ['Air Form', "Fire Form", "Water Form"]);
 	const incorporealMovement = hasFeature(tokenDocument, 'hasIncorporealMovement', ['Incorporeal Movement']);
 	const freedomOfMovement = hasFeature(tokenDocument, 'hasFreedomOfMovement', ['Freedom of Movement']);
-	const hideSpeedButton = tokenDocument.getFlag('elevation-drag-ruler', 'hideSpeedButton');
-	const hideTerrainButton = tokenDocument.getFlag('elevation-drag-ruler', 'hideTerrainButton');
-	const teleportRange = tokenDocument.getFlag('elevation-drag-ruler', 'teleportRange');
-	const teleportCost = tokenDocument.getFlag('elevation-drag-ruler', 'teleportCost');
+	const hideSpeedButton = tokenDocument.getFlag('elevation-drag-ruler-sw5e', 'hideSpeedButton');
+	const hideTerrainButton = tokenDocument.getFlag('elevation-drag-ruler-sw5e', 'hideTerrainButton');
+	const teleportRange = tokenDocument.getFlag('elevation-drag-ruler-sw5e', 'teleportRange');
+	const teleportCost = tokenDocument.getFlag('elevation-drag-ruler-sw5e', 'teleportCost');
 	const resourceTab = html.find('div.tab[data-tab="resources"]');
 
 	if (tokenSpeeds) {
-		resourceTab.append(`<div class='form-group'><label>Selected Movement Speed</label><div class='form-fields'><select name='flags.elevation-drag-ruler.selectedSpeed'></select></div></div>`);
-		const speedField = html.find('select[name="flags.elevation-drag-ruler.selectedSpeed"]');
+		resourceTab.append(`<div class='form-group'><label>Selected Movement Speed</label><div class='form-fields'><select name='flags.elevation-drag-ruler-sw5e.selectedSpeed'></select></div></div>`);
+		const speedField = html.find('select[name="flags.elevation-drag-ruler-sw5e.selectedSpeed"]');
 		for (const tokenSpeed of tokenSpeeds) {
 			speedField.append(`<option value=${tokenSpeed} ${tokenSpeed == selectedSpeed ? "selected" : ""}>${tokenSpeed.charAt(0).toUpperCase() + tokenSpeed.slice(1)}</option>`);
 		};
@@ -68,7 +68,7 @@ function addConfigResourceField(config, html) {
 		resourceTab.append(createConfigOption('Has Freedom of Movement', 'checkbox', 'hasFreedomOfMovement', freedomOfMovement));
 		resourceTab.append(createConfigOption('Has Incorpreal Movement', 'checkbox', 'hasIncorporealMovement', incorporealMovement));
 
-		if (game.settings.get('elevation-drag-ruler', 'teleport')) {
+		if (game.settings.get('elevation-drag-ruler-sw5e', 'teleport')) {
 			resourceTab.append(createConfigOption('Teleport Range', 'number', 'teleportRange', teleportRange));
 			resourceTab.append(createConfigOption('Teleport Cost', 'number', 'teleportCost', teleportCost));
 		};

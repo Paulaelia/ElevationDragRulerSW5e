@@ -1,7 +1,7 @@
 let socket;
 
 Hooks.once("socketlib.ready", () => {
-	socket = socketlib.registerModule("elevation-drag-ruler");
+	socket = socketlib.registerModule("elevation-drag-ruler-sw5e");
 	socket.register("updateCombatantDragRulerFlags", _socketUpdateCombatantDragRulerFlags);
 	socket.register("recalculate", _socketRecalculate);
 });

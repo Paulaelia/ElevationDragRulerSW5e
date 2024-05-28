@@ -7,9 +7,9 @@ Hooks.once("enhancedTerrainLayer.ready", (RuleProvider) => {
 	
 			const tokenSizes = {'tiny': 0, 'sm': 1, 'med': 2, 'lg': 3, 'huge': 4, 'grg': 5};
 			const incapacitatedConditions = ['dead', 'incapacitated', 'paralysis', 'petrified', 'sleep', 'stun', 'unconscious'];
-			const settingTokenTerrain = game.settings.get('elevation-drag-ruler', 'tokenTerrain');
-			const settingFlyingElevation = game.settings.get('elevation-drag-ruler', 'flyingElevation');
-			const settingOneDnd = game.settings.get('elevation-drag-ruler', 'oneDnd');
+			const settingTokenTerrain = game.settings.get('elevation-drag-ruler-sw5e', 'tokenTerrain');
+			const settingFlyingElevation = game.settings.get('elevation-drag-ruler-sw5e', 'flyingElevation');
+			const settingOneDnd = game.settings.get('elevation-drag-ruler-sw5e', 'oneDnd');
 			const waterTerrain = ['water'];
 			const spellTerrain = ['controlWinds', 'gustOfWind', 'plantGrowth', 'wallOfSand', 'wallOfThorns'];
 			
@@ -32,7 +32,7 @@ Hooks.once("enhancedTerrainLayer.ready", (RuleProvider) => {
 			//If the ruler is attached to a token, overwrite the default parameters.
 			if (token) {
 				const tokenDocument = token.document;
-				movementMode = tokenDocument.getFlag('elevation-drag-ruler', 'movementMode');
+				movementMode = tokenDocument.getFlag('elevation-drag-ruler-sw5e', 'movementMode');
 				tokenElevation = tokenDocument.elevation;
 				tokenSize = getProperty(token, 'actor.system.traits.size');
 				tokenDisposition = tokenDocument.disposition;
@@ -102,5 +102,5 @@ Hooks.once("enhancedTerrainLayer.ready", (RuleProvider) => {
 			return movementCost;
 		}
 	}
-	enhancedTerrainLayer.registerModule("elevation-drag-ruler", SW5eRuleProvider);
+	enhancedTerrainLayer.registerModule("elevation-drag-ruler-sw5e", SW5eRuleProvider);
 });

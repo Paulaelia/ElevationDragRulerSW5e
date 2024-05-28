@@ -3,7 +3,7 @@ import { getConfiguredEnvironments, getTokenSpeeds } from './util.js';
 export var keybindForceTeleport;
 
 export function registerKeybindings() {
-	game.keybindings.register('elevation-drag-ruler', 'cycleMovement', {
+	game.keybindings.register('elevation-drag-ruler-sw5e', 'cycleMovement', {
 		name: game.i18n.localize('SW5eDragRulerIntegration.keybindings.cycleMovement.name'),
 		hint: game.i18n.localize('SW5eDragRulerIntegration.keybindings.cycleMovement.hint'),
 		onDown: handleCycleMovement,
@@ -15,7 +15,7 @@ export function registerKeybindings() {
 		precedence: -1,
 	});
 
-	game.keybindings.register('elevation-drag-ruler', 'cycleMovementReverse', {
+	game.keybindings.register('elevation-drag-ruler-sw5e', 'cycleMovementReverse', {
 		name: game.i18n.localize('SW5eDragRulerIntegration.keybindings.cycleMovementReverse.name'),
 		hint: game.i18n.localize('SW5eDragRulerIntegration.keybindings.cycleMovementReverse.hint'),
 		onDown: handleCycleMovementReverse,
@@ -27,7 +27,7 @@ export function registerKeybindings() {
 		precedence: -1,
 	});
 
-	game.keybindings.register('elevation-drag-ruler', 'toggleTerrain', {
+	game.keybindings.register('elevation-drag-ruler-sw5e', 'toggleTerrain', {
 		name: game.i18n.localize('SW5eDragRulerIntegration.keybindings.toggleTerrain.name'),
 		hint: game.i18n.localize('SW5eDragRulerIntegration.keybindings.toggleTerrain.hint'),
 		onDown: handleToggleTerrain,
@@ -39,7 +39,7 @@ export function registerKeybindings() {
 		precedence: -1,
 	});
 
-	game.keybindings.register('elevation-drag-ruler', 'forceTeleport', {
+	game.keybindings.register('elevation-drag-ruler-sw5e', 'forceTeleport', {
 		name: game.i18n.localize('SW5eDragRulerIntegration.keybindings.forceTeleport.name'),
 		hint: game.i18n.localize('SW5eDragRulerIntegration.keybindings.forceTeleport.hint'),
 		onDown: handleForceTeleport,
@@ -57,7 +57,7 @@ function handleCycleMovement(event) {
 	const tokens = canvas.tokens.controlled;
 	tokens.forEach(token => {
 		const tokenSpeeds = getTokenSpeeds(token.document);
-		const selectedMovementMode = token.document.getFlag('elevation-drag-ruler', 'selectedSpeed');
+		const selectedMovementMode = token.document.getFlag('elevation-drag-ruler-sw5e', 'selectedSpeed');
 		var indexSpeed = 1;
 		if (tokenSpeeds.includes(selectedMovementMode)) {
 			indexSpeed = tokenSpeeds.indexOf(selectedMovementMode) + 1;
@@ -66,7 +66,7 @@ function handleCycleMovement(event) {
 			indexSpeed = 0;
 		};
 		const movementMode = tokenSpeeds[indexSpeed];
-		token.document.setFlag('elevation-drag-ruler', 'selectedSpeed', movementMode);
+		token.document.setFlag('elevation-drag-ruler-sw5e', 'selectedSpeed', movementMode);
 	});
 };
 
@@ -74,7 +74,7 @@ function handleCycleMovementReverse(event) {
 	const tokens = canvas.tokens.controlled;
 	tokens.forEach(token => {
 		const tokenSpeeds = getTokenSpeeds(token.document);
-		const selectedMovementMode = token.document.getFlag('elevation-drag-ruler', 'selectedSpeed');
+		const selectedMovementMode = token.document.getFlag('elevation-drag-ruler-sw5e', 'selectedSpeed');
 		var indexSpeed = 1;
 		if (tokenSpeeds.includes(selectedMovementMode)) {
 			indexSpeed = tokenSpeeds.indexOf(selectedMovementMode) - 1;
@@ -83,7 +83,7 @@ function handleCycleMovementReverse(event) {
 			indexSpeed = tokenSpeeds.length - 1;
 		};
 		const movementMode = tokenSpeeds[indexSpeed];
-		token.document.setFlag('elevation-drag-ruler', 'selectedSpeed', movementMode);
+		token.document.setFlag('elevation-drag-ruler-sw5e', 'selectedSpeed', movementMode);
 	});
 };
 
@@ -93,7 +93,7 @@ function handleToggleTerrain(event) {
 		var configuredEnvironments = getConfiguredEnvironments(token.document);
 		if (configuredEnvironments['all']['any']) configuredEnvironments['all']['any'] = false;
 		else configuredEnvironments['all']['any'] = true;
-		token.document.setFlag('elevation-drag-ruler', 'ignoredEnvironments', configuredEnvironments);
+		token.document.setFlag('elevation-drag-ruler-sw5e', 'ignoredEnvironments', configuredEnvironments);
 	})
 }
 

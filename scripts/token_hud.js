@@ -3,11 +3,11 @@ import {getConfiguredEnvironments, getTokenSpeeds} from "./util.js"
 //Cycles through the token's speeds when the 'Switch Speed' button is clicked.
 async function onSpeedButtonClick(tokenDocument, html) {
 	const speeds = getTokenSpeeds(tokenDocument);
-	const oldSelectedSpeed = tokenDocument.getFlag('elevation-drag-ruler', 'selectedSpeed');
+	const oldSelectedSpeed = tokenDocument.getFlag('elevation-drag-ruler-sw5e', 'selectedSpeed');
 	var indexSpeed = 1;
 	if (speeds.includes(oldSelectedSpeed)) indexSpeed = (speeds.indexOf(oldSelectedSpeed) + 1) % speeds.length;
 	const selectedSpeed = speeds[indexSpeed];
-	await tokenDocument.setFlag('elevation-drag-ruler', 'selectedSpeed', selectedSpeed);
+	await tokenDocument.setFlag('elevation-drag-ruler-sw5e', 'selectedSpeed', selectedSpeed);
 	
 	html.find('#switch-speed').remove();
 	addSpeedButton(tokenDocument, html);
@@ -17,7 +17,7 @@ async function onSpeedButtonClick(tokenDocument, html) {
 async function onTerrainButtonClick(tokenDocument, html) {
 	var terrainConfig = getConfiguredEnvironments(tokenDocument);
 	terrainConfig.all.any = !terrainConfig.all.any
-	await tokenDocument.setFlag('elevation-drag-ruler', 'ignoredEnvironments', terrainConfig);
+	await tokenDocument.setFlag('elevation-drag-ruler-sw5e', 'ignoredEnvironments', terrainConfig);
 	html.find('#toggle-terrain').remove();
 	addTerrainButton(tokenDocument, html);
 }
@@ -54,8 +54,8 @@ function getSpeedButtonIcon(selectedSpeed) {
 			buttonIcon = 'grip-lines';
 			break;
 		case 'teleport':
-			if (game.modules.get('terrain-ruler')?.active && game.settings.get('elevation-drag-ruler', 'teleport')) buttonIcon = 'transporter-1';
-			else tokenDocument.setFlag('elevation-drag-ruler', 'selectedSpeed', 'auto');
+			if (game.modules.get('terrain-ruler')?.active && game.settings.get('elevation-drag-ruler-sw5e', 'teleport')) buttonIcon = 'transporter-1';
+			else tokenDocument.setFlag('elevation-drag-ruler-sw5e', 'selectedSpeed', 'auto');
 			break;
 	};
 
@@ -64,7 +64,7 @@ function getSpeedButtonIcon(selectedSpeed) {
 
 //Creates clickable buttons and adds it to the Token HUD.
 export function addSpeedButton(tokenDocument, html) {
-	const selectedSpeed = tokenDocument.getFlag('elevation-drag-ruler', 'selectedSpeed');
+	const selectedSpeed = tokenDocument.getFlag('elevation-drag-ruler-sw5e', 'selectedSpeed');
 	const buttonIcon = getSpeedButtonIcon(selectedSpeed);
 	const speedButton = createButton('Switch Speed', 'switch-speed', `<i class="fas fa-${buttonIcon} fa-fw"></i>`, function() {onSpeedButtonClick(tokenDocument, html)});
 

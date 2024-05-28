@@ -22,7 +22,7 @@ Hooks.once('dragRuler.ready', (SpeedProvider) => {
 			const tokenDocument = token.document
 			//Retrieves the total movement in the token's movement history to be used by the teleportation range.
 			var movementTotal = 0;
-			if (isTokenInCombat(tokenDocument) && game.settings.get('drag-ruler', 'enableMovementHistory') && game.modules.get('terrain-ruler')?.active) movementTotal = getMovementTotal(token) || 0;
+			if (isTokenInCombat(tokenDocument) && game.settings.get('drag-ruler', 'enableMovementHistory')) movementTotal = getMovementTotal(token) || 0;
 
 			//Retrieves and compiles relevant movement data of the token.
 			var walkSpeed = 0;
@@ -45,12 +45,12 @@ Hooks.once('dragRuler.ready', (SpeedProvider) => {
 				burrowSpeed = tokenMovement.burrow;
 				climbSpeed = tokenMovement.climb;
 			}
-			const teleportRange = tokenDocument.getFlag('elevation-drag-ruler', 'teleportRange') || 0;
+			const teleportRange = tokenDocument.getFlag('elevation-drag-ruler-sw5e', 'teleportRange') || 0;
 			const movementModes = {'walk': walkSpeed, 'fly': flySpeed, 'swim': swimSpeed, 'burrow': burrowSpeed, 'climb': climbSpeed, 'teleport': movementTotal + teleportRange};
 			
 			
 			const movementMode = getMovementMode(token) || 'walk';
-			tokenDocument.setFlag('elevation-drag-ruler', 'movementMode', movementMode);
+			tokenDocument.setFlag('elevation-drag-ruler-sw5e', 'movementMode', movementMode);
 
 			//Teleportation does not require speed modifiers or dash ranges.
 			if (movementMode == 'teleport') {
@@ -58,7 +58,7 @@ Hooks.once('dragRuler.ready', (SpeedProvider) => {
 			}
 			//Applies various modifiers to the movement speeds of the token depending on its conditions and features.
 			else {
-				const settingconditionMovement = game.settings.get('elevation-drag-ruler', 'conditionMovement');
+				const settingconditionMovement = game.settings.get('elevation-drag-ruler-sw5e', 'conditionMovement');
 				//Any of these conditions set a creature's speed to 0.
 				const movementRestricted = !settingconditionMovement ? false : (getProperty(token, 'actor.system.attributes.death.failure') == 3 || getProperty(token, 'actor.system.attributes.exhaustion') >= 5 || hasCondition(tokenDocument, ['dead', 'grappled', 'incapacitated', 'paralysis', 'petrified', 'restrain', 'sleep', 'stun', 'unconscious']));
 
@@ -74,5 +74,5 @@ Hooks.once('dragRuler.ready', (SpeedProvider) => {
 		}
 	}
 	//Registers the speed provider to be used by Drag Ruler's API.
-	dragRuler.registerModule('elevation-drag-ruler', SW5eSpeedProvider)
+	dragRuler.registerModule('elevation-drag-ruler-sw5e', SW5eSpeedProvider)
 });
