@@ -1,12 +1,17 @@
 {
-  "id": "elevation-drag-ruler",
-  "title": "DnD5e Drag Ruler Integration",
-  "description": "An enhancement of Drag Ruler for the DnD5e system.",
-  "version": "1.10.0",
+  "id": "elevation-drag-ruler-sw5e",
+  "title": "SW5e Drag Ruler Integration",
+  "description": "An enhancement of Drag Ruler for the SW5e system.",
+  "version": "0.1.0",
   "authors": [
     {
       "name": "Pepijn Sietsema",
       "url": "https://ko-fi.com/pepijn",
+      "flags": {}
+    },
+    {
+      "name": "Paulaelia",
+      "url": "",
       "flags": {}
     }
   ],
@@ -43,11 +48,11 @@
   "relationships": {
     "systems": [
       {
-        "id": "dnd5e",
+        "id": "sw5e",
         "type": "system",
-        "manifest": "https://raw.githubusercontent.com/foundryvtt/dnd5e/master/system.json",
+        "manifest": "https://github.com/sw5e-foundry/enhancedcombathud-sw5e/releases/latest/download/module.json",
         "compatibility": {
-          "verified": "2.2.1"
+          "verified": "2.4.1.2.8.0"
         }
       }
     ],
