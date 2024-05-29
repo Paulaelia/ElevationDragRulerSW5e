@@ -82,8 +82,7 @@
   "esmodules": [
     "scripts/main.js",
     "scripts/socket.js",
-    "scripts/speed_provider.js",
-    "scripts/rule_provider.js"
+    "scripts/speed_provider.js"
   ],
   "url": "https://github.com/Paulaelia/ElevationDragRulerSW5e",
   "manifest": "https://github.com/Paulaelia/ElevationDragRulerSW5e/releases/latest/download/module.json",

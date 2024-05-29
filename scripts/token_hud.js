@@ -1,4 +1,4 @@
-import {getConfiguredEnvironments, getTokenSpeeds} from "./util.js"
+import {getTokenSpeeds} from "./util.js"
 
 //Cycles through the token's speeds when the 'Switch Speed' button is clicked.
 async function onSpeedButtonClick(tokenDocument, html) {
@@ -11,15 +11,6 @@ async function onSpeedButtonClick(tokenDocument, html) {
 	
 	html.find('#switch-speed').remove();
 	addSpeedButton(tokenDocument, html);
-}
-
-// Toggles terrain for the token when the 'Toggle Terrain' button is clicked.
-async function onTerrainButtonClick(tokenDocument, html) {
-	var terrainConfig = getConfiguredEnvironments(tokenDocument);
-	terrainConfig.all.any = !terrainConfig.all.any
-	await tokenDocument.setFlag('elevation-drag-ruler-sw5e', 'ignoredEnvironments', terrainConfig);
-	html.find('#toggle-terrain').remove();
-	addTerrainButton(tokenDocument, html);
 }
 
 // Basic button factory.
@@ -53,10 +44,6 @@ function getSpeedButtonIcon(selectedSpeed) {
 		case 'climb':
 			buttonIcon = 'grip-lines';
 			break;
-		case 'teleport':
-			if (game.modules.get('terrain-ruler')?.active && game.settings.get('elevation-drag-ruler-sw5e', 'teleport')) buttonIcon = 'transporter-1';
-			else tokenDocument.setFlag('elevation-drag-ruler-sw5e', 'selectedSpeed', 'auto');
-			break;
 	};
 
 	return buttonIcon;
@@ -69,12 +56,4 @@ export function addSpeedButton(tokenDocument, html) {
 	const speedButton = createButton('Switch Speed', 'switch-speed', `<i class="fas fa-${buttonIcon} fa-fw"></i>`, function() {onSpeedButtonClick(tokenDocument, html)});
 
 	html.find('div.left').append(speedButton);
-}
-export function addTerrainButton(tokenDocument, html) {
-	const terrainConfig = getConfiguredEnvironments(tokenDocument).all.any;
-
-	const terrainButton = createButton('Toggle Terrain', 'toggle-terrain', '<i class="fas fa-hiking fa-fw"></i>', function() {onTerrainButtonClick(tokenDocument, html)});
-	if (!terrainConfig) terrainButton.classList.add('active');
-
-	html.find('div.right').append(terrainButton);
 }

@@ -1,12 +1,3 @@
-import { keybindForceTeleport } from "./keybindings.js";
-
-//Returns the environment configuration of a token, which sets which environments a token should ignore. 
-export function getConfiguredEnvironments(tokenDocument) {
-	const defaultConfiguredEnvironments = {'all': {'any': false, 'walk': false, 'swim': false, 'fly': false, 'burrow': false, 'climb': false}, 'arctic': {'any': false, 'walk': false, 'swim': false, 'fly': false, 'burrow': false, 'climb': false}, 'coast': {'any': false, 'walk': false, 'swim': false, 'fly': false, 'burrow': false, 'climb': false}, 'desert': {'any': false, 'walk': false, 'swim': false, 'fly': false, 'burrow': false, 'climb': false}, 'forest': {'any': false, 'walk': false, 'swim': false, 'fly': false, 'burrow': false, 'climb': false}, 'grassland': {'any': false, 'walk': false, 'swim': false, 'fly': false, 'burrow': false, 'climb': false}, 'jungle': {'any': false, 'walk': false, 'swim': false, 'fly': false, 'burrow': false, 'climb': false}, 'mountain': {'any': false, 'walk': false, 'swim': false, 'fly': false, 'burrow': true, 'climb': true}, 'swamp': {'any': false, 'walk': false, 'swim': false, 'fly': false, 'burrow': false, 'climb': false}, 'underdark': {'any': false, 'walk': false, 'swim': false, 'fly': false, 'burrow': false, 'climb': false}, 'urban': {'any': false, 'walk': false, 'swim': false, 'fly': false, 'burrow': false, 'climb': false}, 'water': {'any': false, 'walk': false, 'swim': true, 'fly': false, 'burrow': false, 'climb': false}};
-	var configuredEnvironments = tokenDocument.getFlag('elevation-drag-ruler-sw5e', 'ignoredEnvironments');
-	return configuredEnvironments || defaultConfiguredEnvironments;
-};
-
 //Returns the highest movement mode of a given object of movement modes.
 export function getHighestMovementMode(movementModes) {
 	var highestSpeed = 0;
@@ -53,7 +44,6 @@ export function getTokenSpeeds(tokenDocument) {
 			tokenSpeeds.push(key);
 		}
 	}
-	if (game.settings.get('elevation-drag-ruler-sw5e', 'teleport') && game.modules.get('terrain-ruler')?.active && tokenDocument.getFlag('elevation-drag-ruler-sw5e', 'teleportRange') > 0) tokenSpeeds.push('teleport');
 	return tokenSpeeds;
 };
 
@@ -82,52 +72,17 @@ export function getMovementMode(token) {
 	}
 	const movementModes = {'walk': walkSpeed, 'fly': flySpeed, 'swim': swimSpeed,'burrow': burrowSpeed, 'climb': climbSpeed};
 
-	const settingElevationSwitching = game.settings.get('elevation-drag-ruler-sw5e', 'elevationSwitching');
-	const settingForceFlying = game.settings.get('elevation-drag-ruler-sw5e', 'forceFlying');
-	const settingForceSwimming = game.settings.get('elevation-drag-ruler-sw5e', 'forceSwimming');
-	const settingForceBurrowing = game.settings.get('elevation-drag-ruler-sw5e', 'forceBurrowing');
-	const forceTeleport = tokenDocument.getFlag('elevation-drag-ruler-sw5e', 'forceTeleport');
 	const selectedSpeed = tokenDocument.getFlag('elevation-drag-ruler-sw5e', 'selectedSpeed');
-	const elevation = tokenDocument.elevation;
-	var environments = [];
-
-	const terrainRulerAvailable = game.modules.get('terrain-ruler')?.active;
-	if (terrainRulerAvailable) {
-		const options = {};
-		options.token = token;
-		const terrains = canvas.terrain.terrainFromPixels(tokenDocument.x, tokenDocument.y, options);
-		if (terrains.length > 0)
-			terrains.forEach(terrain => environments.push(terrain.document.environment));
-	}
 
 	//Default movement mode.
 	const defaultMovementMode = 'walk';
 	
-	if (game.settings.get('elevation-drag-ruler-sw5e', 'teleport') && terrainRulerAvailable && (forceTeleport || keybindForceTeleport || selectedSpeed == 'teleport'))
-		return 'teleport';
 	//If a token has a speed selected use that.
-	if (selectedSpeed && selectedSpeed != 'auto' && selectedSpeed != 'teleport')
+	if (selectedSpeed && selectedSpeed != 'auto')
 		return selectedSpeed;
 	//If the token has no speed selected and the 'Use Elevation' setting is off, use their swimming speed if they're in water or else their highest speed.
-	if (!settingElevationSwitching) {
-		if (environments.includes('water') && movementModes.swim > 0)
-			return 'swim';
+	if (selectedSpeed && selectedSpeed == 'auto')
 		return getHighestMovementMode(movementModes);
-	}
-	//If the token has no speed selected and the 'Use Elevation' setting is on, base speed on elevation and terrain (if available).
-	if (elevation < 0 && !environments.includes('water') && movementModes.burrow > 0)
-		return 'burrow';
-	if (elevation < 0 && environments.includes('water') && movementModes.swim > 0)
-		return 'swim';
-	if (elevation > 0 && movementModes.fly > 0)
-		return 'fly';
-	
-	if (elevation == 0 && settingForceSwimming && environments.includes('water') && (movementModes.swim > 0))
-		return 'swim';
-	if (elevation == 0 && settingForceFlying && (movementModes.fly > movementModes.walk))
-		return 'fly';
-	if (elevation == 0 && settingForceBurrowing && !environments.includes('water') && (movementModes.burrow > movementModes.walk) && (movementModes.burrow > movementModes.fly))
-		return 'burrow';
 
 	return defaultMovementMode;
 };
@@ -163,7 +118,7 @@ export function hasFeature(tokenDocument, flag, searchList) {
 	const actor = tokenDocument.actor || tokenDocument.parent;
 	if (!actor) return false;
 
-	const actorFeatures = actor.items.filter(feature => feature.type == 'feat').map(feature => feature.name);
+	const actorFeatures = actor.items.filter(feature => feature.type == 'feat' || feature.type == 'maneuver').map(feature => feature.name);
 	const featureFound = searchList.find(searchFeature => actorFeatures.includes(searchFeature));
 	return featureFound !== undefined;
 };

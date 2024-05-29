@@ -11,7 +11,6 @@ Hooks.once('dragRuler.ready', (SpeedProvider) => {
 				{id: 'swim', default: 0x0000FF, 'name': 'Swimming'},
 				{id: 'burrow', default: 0xFFAA00, 'name': 'Burrowing'},
 				{id: 'climb', default: 0xAA6600, 'name': 'Climbing'},
-				{id: 'teleport', default: 0xAA00AA, 'name': 'Teleporting'},
 				{id: 'dash', default: 0xFFFF00, 'name': 'Dashing'},
 				{id: 'bonusDash', default: 0xFF6600, 'name': 'Bonus Dashing'}
 			]
@@ -45,32 +44,26 @@ Hooks.once('dragRuler.ready', (SpeedProvider) => {
 				burrowSpeed = tokenMovement.burrow;
 				climbSpeed = tokenMovement.climb;
 			}
-			const teleportRange = tokenDocument.getFlag('elevation-drag-ruler-sw5e', 'teleportRange') || 0;
-			const movementModes = {'walk': walkSpeed, 'fly': flySpeed, 'swim': swimSpeed, 'burrow': burrowSpeed, 'climb': climbSpeed, 'teleport': movementTotal + teleportRange};
-			
+
+			const movementModes = {'walk': walkSpeed, 'fly': flySpeed, 'swim': swimSpeed, 'burrow': burrowSpeed, 'climb': climbSpeed};
 			
 			const movementMode = getMovementMode(token) || 'walk';
 			tokenDocument.setFlag('elevation-drag-ruler-sw5e', 'movementMode', movementMode);
 
-			//Teleportation does not require speed modifiers or dash ranges.
-			if (movementMode == 'teleport') {
-				return [{range: movementModes['teleport'], color: 'teleport'}]
-			}
 			//Applies various modifiers to the movement speeds of the token depending on its conditions and features.
-			else {
-				const settingconditionMovement = game.settings.get('elevation-drag-ruler-sw5e', 'conditionMovement');
-				//Any of these conditions set a creature's speed to 0.
-				const movementRestricted = !settingconditionMovement ? false : (getProperty(token, 'actor.system.attributes.death.failure') == 3 || getProperty(token, 'actor.system.attributes.exhaustion') >= 5 || hasCondition(tokenDocument, ['dead', 'grappled', 'incapacitated', 'paralysis', 'petrified', 'restrain', 'sleep', 'stun', 'unconscious']));
+			const settingconditionMovement = game.settings.get('elevation-drag-ruler-sw5e', 'conditionMovement');
 
-				//Creatures can be slowed or hasted to half or double their available movement speeds respectively.
-				const movementMultiplier = !settingconditionMovement ? 1 : (((hasCondition(tokenDocument, ['slowed']) || getProperty(token, 'actor.system.attributes.exhaustion') >= 2) ? 0.5 : 1) * (hasCondition(tokenDocument, ['hasted']) ? 2 : 1));
+			//Any of these conditions set a creature's speed to 0.
+			const movementRestricted = !settingconditionMovement ? false : (getProperty(token, 'actor.system.attributes.death.failure') == 3 || getProperty(token, 'actor.system.attributes.exhaustion') >= 5 || hasCondition(tokenDocument, ['dead', 'grappled', 'incapacitated', 'paralysis', 'petrified', 'restrain', 'sleep', 'stun', 'unconscious']));
 
-				//Retrieves if the token has a bonus action dash available.
-				const bonusDashMultiplier = hasFeature(tokenDocument, 'hasBonusDash', ['Cunning Action', 'Escape', 'LightFooted', 'Rapid Movement']) ? 3 : 2;
+			//Creatures can be slowed or hasted to half or double their available movement speeds respectively.
+			const movementMultiplier = !settingconditionMovement ? 1 : (((hasCondition(tokenDocument, ['slowed']) || getProperty(token, 'actor.system.attributes.exhaustion') >= 2) ? 0.5 : 1) * (hasCondition(tokenDocument, ['hasted']) ? 2 : 1));
 
-				const movementRange = movementRestricted ? 0 : (movementModes[movementMode] * movementMultiplier);
-				return [{range: movementRange, color: movementMode}, {range: movementRange * 2, color: 'dash'}, {range: movementRange * bonusDashMultiplier, color: 'bonusDash'}];
-			}
+			//Retrieves if the token has a bonus action dash available.
+			const bonusDashMultiplier = hasFeature(tokenDocument, 'hasBonusDash', ['Deliberate Movement']) ? 3 : 2;
+
+			const movementRange = movementRestricted ? 0 : (movementModes[movementMode] * movementMultiplier);
+			return [{range: movementRange, color: movementMode}, {range: movementRange * 2, color: 'dash'}, {range: movementRange * bonusDashMultiplier, color: 'bonusDash'}];
 		}
 	}
 	//Registers the speed provider to be used by Drag Ruler's API.
